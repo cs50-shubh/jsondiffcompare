@@ -28,15 +28,53 @@ header {
     text-align: center;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header h1 {
     font-size: 2.5em;
     margin-bottom: 10px;
     font-weight: 700;
+    margin: 0;
 }
 
 .subtitle {
     font-size: 1.1em;
     opacity: 0.9;
+    margin: 0;
 }
 
 .controls {
@@ -387,6 +425,15 @@ header h1 {
         padding: 20px;
     }
     
+    .header-content {
+        gap: 15px;
+    }
+    
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
     header h1 {
         font-size: 2em;
     }
@@ -451,6 +498,15 @@ header h1 {
 }
 
 @media (max-width: 480px) {
+    .header-content {
+        gap: 10px;
+    }
+    
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
     header h1 {
         font-size: 1.5em;
     }
