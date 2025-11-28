@@ -236,6 +236,24 @@ header h1 {
     padding-top: 30px;
 }
 
+.ad-section {
+    margin: 0 40px 20px;
+}
+
+.site-footer {
+    padding: 16px 40px 24px;
+    background: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 .diff-header {
     display: flex;
     justify-content: space-between;
