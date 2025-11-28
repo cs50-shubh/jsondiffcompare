@@ -26,6 +26,13 @@ const exampleJson2 = {
   phone: "555-1234",
 };
 
+// Analytics helper function
+function trackEvent(eventName, eventParams = {}) {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', eventName, eventParams);
+  }
+}
+
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
   const compareBtn = document.getElementById("compareBtn");
@@ -46,27 +53,38 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load example data
   loadExample1Btn.addEventListener("click", () => {
     json1Input.value = JSON.stringify(exampleJson1, null, 2);
+    trackEvent('load_example', { example: 'json1' });
   });
 
   loadExample2Btn.addEventListener("click", () => {
     json2Input.value = JSON.stringify(exampleJson2, null, 2);
+    trackEvent('load_example', { example: 'json2' });
   });
 
   // Format JSON
   formatBtn.addEventListener("click", () => {
+    let formatted = 0;
     try {
       const json1 = JSON.parse(json1Input.value);
       json1Input.value = JSON.stringify(json1, null, 2);
+      formatted++;
     } catch (e) {
       showError("JSON 1 is invalid. Cannot format.");
+      trackEvent('format_error', { json: 'json1', error: e.message });
       return;
     }
 
     try {
       const json2 = JSON.parse(json2Input.value);
       json2Input.value = JSON.stringify(json2, null, 2);
+      formatted++;
     } catch (e) {
       showError("JSON 2 is invalid. Cannot format.");
+      trackEvent('format_error', { json: 'json2', error: e.message });
+    }
+    
+    if (formatted > 0) {
+      trackEvent('format_json', { count: formatted });
     }
   });
 
@@ -77,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     diffSection.style.display = "none";
     inputSection.style.display = "grid";
     errorMessage.style.display = "none";
+    trackEvent('clear_all');
   });
 
   // Compare JSON
@@ -96,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function compareJson() {
     hideError();
+    trackEvent('compare_clicked');
 
     let obj1, obj2;
 
@@ -103,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
       obj1 = JSON.parse(json1Input.value || "{}");
     } catch (e) {
       showError(`JSON 1 is invalid: ${e.message}`);
+      trackEvent('compare_error', { json: 'json1', error: e.message });
       return;
     }
 
@@ -110,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
       obj2 = JSON.parse(json2Input.value || "{}");
     } catch (e) {
       showError(`JSON 2 is invalid: ${e.message}`);
+      trackEvent('compare_error', { json: 'json2', error: e.message });
       return;
     }
 
@@ -238,6 +260,16 @@ document.addEventListener("DOMContentLoaded", () => {
       modified: Object.values(diffMap).filter((t) => t === "modified").length,
     };
     updateStats(stats);
+    
+    // Track successful comparison
+    const totalChanges = stats.added + stats.removed + stats.modified;
+    trackEvent('compare_success', {
+      added: stats.added,
+      removed: stats.removed,
+      modified: stats.modified,
+      total_changes: totalChanges,
+      has_differences: totalChanges > 0
+    });
   }
 
   function buildKeyLineMap(obj, lines) {
