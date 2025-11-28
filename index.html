@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>
+      JSON Diff Compare - Compare JSON Objects Online | Free JSON Comparison
+      Tool
+    </title>
+    <meta
+      name="title"
+      content="JSON Diff Compare - Compare JSON Objects Online | Free JSON Comparison Tool"
+    />
+    <meta
+      name="description"
+      content="Free online JSON diff tool to compare two JSON objects side-by-side. Visualize differences with color-coded line-by-line comparison. No registration required."
+    />
+    <meta
+      name="keywords"
+      content="json diff, json compare, json difference, compare json online, json diff tool, json comparison tool, diff json"
+    />
+    <meta name="author" content="JSON Diff Compare" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="JSON Diff Compare - Compare JSON Objects Online"
+    />
+    <meta
+      property="og:description"
+      content="Free online tool to compare two JSON objects side-by-side with visual differences. Fast, secure, and no registration required."
+    />
+    <meta property="og:image" content="" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:title"
+      content="JSON Diff Compare - Compare JSON Objects Online"
+    />
+    <meta
+      property="twitter:description"
+      content="Free online tool to compare two JSON objects side-by-side with visual differences."
+    />
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "JSON Diff Compare",
+        "description": "Free online tool to compare two JSON objects and visualize their differences with color-coded line-by-line comparison",
+        "url": "",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Compare two JSON objects side-by-side",
+          "Visual line-by-line difference highlighting",
+          "Color-coded additions, removals, and modifications",
+          "No registration required",
+          "100% client-side processing",
+          "Fast and secure"
+        ]
+      }
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>JSON Diff Compare</h1>
+        <p class="subtitle">
+          Compare two JSON objects and visualize their differences
+        </p>
+      </header>
+
+      <!-- SEO-friendly content visible to crawlers -->
+      <div style="display: none" aria-hidden="true">
+        <h2>Free JSON Comparison Tool</h2>
+        <p>
+          Compare JSON objects online with our free JSON diff tool. This JSON
+          compare allows you to compare two JSON files or objects side-by-side,
+          highlighting differences with color-coded visual indicators. Perfect
+          for developers, QA engineers, and anyone working with JSON data. Our
+          JSON difference tool processes everything client-side, ensuring your
+          data never leaves your browser.
+        </p>
+        <h3>Features:</h3>
+        <ul>
+          <li>Side-by-side JSON comparison</li>
+          <li>Line-by-line difference visualization</li>
+          <li>Color-coded additions (green) and removals (red)</li>
+          <li>No server uploads - 100% client-side processing</li>
+          <li>Fast and secure JSON diff analysis</li>
+          <li>Works with nested objects and arrays</li>
+        </ul>
+      </div>
+
+      <div class="controls">
+        <button id="compareBtn" class="btn btn-primary">Compare JSON</button>
+        <button id="clearBtn" class="btn btn-secondary">Clear All</button>
+        <button id="formatBtn" class="btn btn-secondary">Format JSON</button>
+      </div>
+
+      <div id="inputSection" class="input-section">
+        <div class="input-panel">
+          <div class="panel-header">
+            <h2>JSON 1</h2>
+            <button class="btn-small" id="loadExample1">Load Example</button>
+          </div>
+          <textarea
+            id="json1"
+            class="json-input"
+            placeholder='Paste your first JSON here...&#10;Example: {"name": "John", "age": 30}'
+          ></textarea>
+        </div>
+
+        <div class="input-panel">
+          <div class="panel-header">
+            <h2>JSON 2</h2>
+            <button class="btn-small" id="loadExample2">Load Example</button>
+          </div>
+          <textarea
+            id="json2"
+            class="json-input"
+            placeholder='Paste your second JSON here...&#10;Example: {"name": "Jane", "age": 30}'
+          ></textarea>
+        </div>
+      </div>
+
+      <div id="errorMessage" class="error-message" style="display: none"></div>
+
+      <div id="diffSection" class="diff-section" style="display: none">
+        <div class="diff-header">
+          <h2>Line-by-Line Comparison</h2>
+          <div class="diff-stats">
+            <span class="stat added" id="addedCount">+0</span>
+            <span class="stat removed" id="removedCount">-0</span>
+            <span class="stat modified" id="modifiedCount">~0</span>
+          </div>
+        </div>
+        <div class="diff-viewer">
+          <div class="diff-panel">
+            <div class="diff-panel-header">JSON 1</div>
+            <div id="diffLeft" class="diff-content"></div>
+          </div>
+          <div class="diff-panel">
+            <div class="diff-panel-header">JSON 2</div>
+            <div id="diffRight" class="diff-content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,482 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.controls {
+    padding: 20px 40px;
+    background: #f8f9fa;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 14px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-small:hover {
+    background: #5568d3;
+}
+
+.switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    width: 50px;
+    height: 26px;
+    background: #ccc;
+    border-radius: 26px;
+    position: relative;
+    transition: background 0.3s;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s;
+}
+
+.switch input:checked + .slider {
+    background: #667eea;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+.switch-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.input-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 40px;
+}
+
+.input-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.panel-header h2 {
+    font-size: 1.3em;
+    color: #333;
+}
+
+.json-input {
+    width: 100%;
+    min-height: 400px;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+.json-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.error-message {
+    margin: 20px 40px;
+    padding: 15px;
+    background: #fee;
+    border-left: 4px solid #f00;
+    border-radius: 4px;
+    color: #c00;
+    font-family: monospace;
+}
+
+.diff-section {
+    margin: 0 40px 40px;
+    border-top: 2px solid #e0e0e0;
+    padding-top: 30px;
+}
+
+.diff-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.diff-header h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.diff-stats {
+    display: flex;
+    gap: 15px;
+}
+
+.stat {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.stat.added {
+    background: #d4edda;
+    color: #155724;
+}
+
+.stat.removed {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.stat.modified {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.diff-viewer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: calc(100vh - 400px);
+    min-height: 400px;
+    max-height: 800px;
+    background: #fff;
+}
+
+.diff-panel {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #e0e0e0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.diff-panel:last-child {
+    border-right: none;
+}
+
+.diff-panel-header {
+    background: #f8f9fa;
+    padding: 12px 15px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.diff-content {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    overflow-y: auto;
+    overflow-x: auto;
+    background: #fff;
+    flex: 1;
+    min-height: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+.diff-content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.diff-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.diff-content::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.diff-content::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+.diff-line {
+    padding: 2px 15px;
+    display: flex;
+    min-height: 1.8em;
+    align-items: center;
+    white-space: pre;
+    word-break: break-word;
+}
+
+.diff-line-number {
+    display: inline-block;
+    width: 50px;
+    color: #999;
+    text-align: right;
+    padding-right: 15px;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.diff-line-content {
+    flex: 1;
+    padding-left: 10px;
+    overflow-x: auto;
+    word-break: break-word;
+}
+
+.diff-line.removed {
+    background: #ffcdd2;
+}
+
+.diff-line.removed .diff-line-content {
+    color: #b71c1c;
+    font-weight: 500;
+}
+
+.diff-line.added {
+    background: #c8e6c9;
+}
+
+.diff-line.added .diff-line-content {
+    color: #1b5e20;
+    font-weight: 500;
+}
+
+.diff-line.modified-left {
+    background: #ffcdd2;
+}
+
+.diff-line.modified-left .diff-line-content {
+    color: #b71c1c;
+    font-weight: 500;
+}
+
+.diff-line.modified-right {
+    background: #c8e6c9;
+}
+
+.diff-line.modified-right .diff-line-content {
+    color: #1b5e20;
+    font-weight: 500;
+}
+
+.diff-line.unchanged {
+    background: #fff;
+}
+
+.diff-line.unchanged .diff-line-content {
+    color: #333;
+}
+
+@media (max-width: 968px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        border-radius: 8px;
+    }
+    
+    header {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .subtitle {
+        font-size: 1em;
+    }
+    
+    .controls {
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .input-section {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .diff-section {
+        margin: 0 20px 20px;
+        padding-top: 20px;
+    }
+    
+    .diff-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .diff-stats {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .diff-viewer {
+        grid-template-columns: 1fr;
+        height: auto;
+        max-height: none;
+        min-height: auto;
+    }
+    
+    .diff-panel {
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        min-height: 300px;
+        max-height: 50vh;
+    }
+    
+    .diff-panel:last-child {
+        border-bottom: none;
+    }
+    
+    .error-message {
+        margin: 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    .panel-header h2 {
+        font-size: 1.1em;
+    }
+    
+    .diff-header h2 {
+        font-size: 1.2em;
+    }
+    
+    .diff-panel-header {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .diff-content {
+        font-size: 12px;
+    }
+    
+    .diff-line-number {
+        width: 40px;
+        padding-right: 10px;
+        font-size: 11px;
+    }
+}
+
+
